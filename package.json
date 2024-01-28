@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "chai": "^5.0.3",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "circular-json": "^0.5.9"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "mocha",
+    "test:watch": "mocha --watch"
+  }
+}
