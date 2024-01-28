@@ -27,7 +27,7 @@ jobs:
   notify-success:
     runs-on: ubuntu-latest
     needs: test
-    if: success() && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+    if: ${{success()}} && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
 
     steps:
       - name: Send Discord Message
