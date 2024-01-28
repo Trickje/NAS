@@ -1,6 +1,7 @@
 import { expect } from "chai";
 /**
  * This is a test that just checks a standard function in JavaScript. If this test fails SHTF.
+ * This is tested with Mocha
  */
 describe("Array", function () {
   describe("#indexOf()", function () {
