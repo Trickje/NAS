@@ -41,4 +41,3 @@ jobs:
           url: "https://github.com/Trickje/NAS/actions/workflows/runtests.yml"
           username: "Github.com/Trickje/NAS: Run Tests"
           color: 0xff0000
-          message: "One or more tests have failed in the GitHub Actions workflow. Check the workflow runs for details."
