@@ -1,4 +1,4 @@
-name: Notify Failure
+name: Notify Success
 
 on:
   push:
