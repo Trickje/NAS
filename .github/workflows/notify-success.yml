@@ -30,11 +30,10 @@ jobs:
       - name: Get previous workflow run status
         id: get_previous_failure
         run: |
-          echo "::set-output name=previous_failure::$( \
+          echo "previous_failure_message=${value}" >> $GITHUB_OUTPUT
           curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/notify-failure.yml/runs?event=push&status=success \
-          | jq '.workflow_runs[0].conclusion == "failure"'
-          )"
+          | jq '.workflow_runs[0].conclusion == "failure"' >> $GITHUB_OUTPUT
 
   notify-success:
     runs-on: ubuntu-latest
