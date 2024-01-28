@@ -33,7 +33,8 @@ jobs:
           echo "::set-output name=previous_failure::$( \
           curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/notify-failure.yml/runs?event=push&status=success \
-          | jq '.workflow_runs[0].conclusion == \"failure\"')"
+          | jq '.workflow_runs[0].conclusion == "failure"'
+          )"
 
   notify-success:
     runs-on: ubuntu-latest
