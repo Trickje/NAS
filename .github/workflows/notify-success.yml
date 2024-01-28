@@ -1,7 +1,9 @@
-name: Notify Failure
+name: Notify Success After Failure
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -9,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
-          node-version: ">=20.11.0" # Should run on node versions released after this is created.
+          node-version: "14"
 
       - name: Install dependencies
         run: npm install
@@ -22,10 +24,10 @@ jobs:
       - name: Run tests
         run: npm test
 
-  notify:
+  notify-success:
     runs-on: ubuntu-latest
     needs: test
-    if: ${{ failure() }}
+    if: success() && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
 
     steps:
       - name: Send Discord Message
@@ -33,12 +35,12 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_TEST_FAILS }}
           status: ${{job.status}}
-          content: "@here the tests are failing."
+          content: "The tests succeeding again."
           title: "Run Tests"
           description: "Runs all of the tests that are defined in the package.json"
           #image: ${{secrets.EMBED_IMAGE}}
           #avatar_url: ${{secrets.AVATAR_URL}}
           url: "https://github.com/Trickje/NAS/actions/workflows/runtests.yml"
           username: "Github.com/Trickje/NAS: Run Tests"
-          color: 0xff0000
-          message: "One or more tests have failed in the GitHub Actions workflow. Check the workflow runs for details."
+          color: 0x00ff00
+          message: "Tests passed in the GitHub Actions workflow after a previous failure."
