@@ -7,7 +7,6 @@
   "dependencies": {
     "circular-json": "^0.5.9"
   },
-  "type": "module",
   "scripts": {
     "test": "mocha",
     "test:watch": "mocha --watch"

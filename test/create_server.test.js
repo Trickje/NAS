@@ -1,14 +1,14 @@
-import * as chai from "chai";
-import http from "http";
-// Import the module or function that creates the HTTP server
-import { create_server } from "../modules/create_server.js";
-
-// Configure Chai to work with HTTP
-chai.use(require("chai-http"));
-const expect = chai.expect;
-
-describe("HTTP Server", function () {
+describe("HTTP Server", async function () {
   let server;
+  var chai = await import("chai");
+  var chaiHttp = await import("chai-http");
+  var http = await import("http");
+  // Import the module or function that creates the HTTP server
+  var { create_server } = await import("../modules/create_server.js");
+
+  // Configure Chai to work with HTTP
+  chai.use(chaiHttp);
+  const expect = chai.expect;
 
   // Start the server before running tests
   before(function (done) {
