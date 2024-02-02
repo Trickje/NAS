@@ -10,7 +10,7 @@ describe("HTTP Server", function () {
     var http = require("http");
     server = http.createServer(create_server);
     server.listen(3000); // TODO: this is hijacking the thread and making a timeout.. Wait for a response and then with the response unsubscribe the listener Start the server on port 3000
-
+    //note: this might be causing the Github timeout.. Maybe it's worth it to not have this test enabled standard.
     // Make a request to your server
     var options = {
       hostname: "localhost",
