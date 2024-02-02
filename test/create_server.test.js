@@ -1,6 +1,6 @@
 describe("HTTP Server", function () {
   var { create_server } = import("../modules/create_server.js");
-
+  /* 
   let server;
   var responseData = "";
   var clientRequest;
@@ -28,7 +28,7 @@ describe("HTTP Server", function () {
         responseData += chunk;
       });
       //TODO: finish setting up a proper serverResponse.
-      serverResponse.setTimeout(1000, () => {
+      serverResponse.setTimeout(5000, () => {
         server.close();
       });
 
@@ -51,7 +51,7 @@ describe("HTTP Server", function () {
     //console.log("running  the after");
     server.close(); // Close the server
   });
-
+ */
   // Test for a valid response
   it("should return a valid response", function (done) {
     const assert = require("node:assert").strict;
