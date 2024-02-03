@@ -34,7 +34,7 @@ describe("Password check test", () => {
   });
 
   it("needs to fail a password that attempts an SQL injection", (done) => {
-    const password = '" OR ""="'; // SQL injection attempt
+    const password = 'MyP@ssw0rd" OR ""="'; // SQL injection attempt
     assert.strictEqual(check_password(password), false);
     done();
   });

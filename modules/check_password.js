@@ -8,6 +8,6 @@ export function check_password(password) {
       It must be at least 8 characters in length.
    */
   const checking_regex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])(?!.*[="'\`])[A-Za-z\d@$!%*?&]{8,}$/;
   return checking_regex.test(password);
 }
