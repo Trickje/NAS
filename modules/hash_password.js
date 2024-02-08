@@ -8,7 +8,7 @@ export async function hash_password(password) {
 }
 
 // Function to compare a plain text password with its hashed version
-export async function compare_password(plainPassword, hashedPassword) {
+export async function comparePassword(plainPassword, hashedPassword) {
   const match = await bcrypt.compare(plainPassword, hashedPassword);
   return match;
 }

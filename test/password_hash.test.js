@@ -1,5 +1,5 @@
 import assert from "assert";
-import { hash_password, compare_password } from "../modules/hash_password.js";
+import { hash_password, comparePassword } from "../modules/hash_password.js";
 
 describe("Password functions", function () {
   describe("hash_password", function () {
@@ -15,12 +15,12 @@ describe("Password functions", function () {
     });
   });
 
-  describe("compare_password", function () {
+  describe("comparePassword", function () {
     it("should compare a plain password with its hashed version", async function () {
       const previouslyHashedPassword =
         "$2b$10$yavaXXLJ50RWsmDwz9zmSOm8jHVxdsLErT5jHdTi9nPVK68CRkYSm";
 
-      const match = await compare_password(
+      const match = await comparePassword(
         "MyP@ssw0rd",
         previouslyHashedPassword
       );
