@@ -1,4 +1,4 @@
-import { create_server } from "./modules/create_server";
-var http = require("http"); //This is to 'include' the http module
+import { create_server } from "./modules/create_server.js";
+import http from "http";
 
 http.createServer(create_server).listen(8080);

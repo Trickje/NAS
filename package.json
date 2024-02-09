@@ -4,7 +4,8 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "circular-json": "^0.5.9"
+    "circular-json": "^0.5.9",
+    "jsdom": "^24.0.0"
   },
   "type": "module",
   "scripts": {
