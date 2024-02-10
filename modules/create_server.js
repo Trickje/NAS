@@ -41,9 +41,7 @@ export function create_server(req, res) {
   // Check if the request is for the root URL
   if (req.url === "/") {
     serveLoginPage(req, res);
-  }
-  // Handle POST request for login
-  else if (req.method === "POST" && req.url === "/login") {
+  } else if (req.method === "POST" && req.url === "/login") {
     handleLogin(req, res);
   }
   // Handle other routes

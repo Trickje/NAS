@@ -6,6 +6,7 @@ function createLoginFormElements(document) {
   // Create login form
   var loginForm = document.createElement("form");
   loginForm.setAttribute("id", "loginForm");
+  loginForm.setAttribute("action", "/login");
   loginForm.setAttribute("method", "post"); // Set method to POST
 
   // Username field
@@ -38,6 +39,8 @@ function createLoginFormElements(document) {
 
   return loginForm;
 }
+
+/*
 // Function to handle form submission
 function handleFormSubmission(event) {
   event.preventDefault(); // Prevent default form submission
@@ -65,25 +68,19 @@ function handleFormSubmission(event) {
       // Handle error
       console.error(error);
     });
-}
+}*/
 
 // Function to create login page DOM tree
 export function createLoginPage() {
   // Create a new DOM window
   var dom = new JSDOM(`<!DOCTYPE html><html><head></head><body></body></html>`);
   var { document } = dom.window;
-  console.log("Made the login page");
   // Create login form elements
   var loginForm = createLoginFormElements(document);
 
   // Append form to body
   document.body.appendChild(loginForm);
 
-  // Add form submission event listener
-  loginForm.addEventListener("submit", handleFormSubmission);
-  loginForm.addEventListener("click", function (event) {
-    console.log("Event type:", event.type);
-  });
   // Return the login form HTML
   return dom.serialize();
 }
