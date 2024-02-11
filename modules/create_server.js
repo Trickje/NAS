@@ -24,8 +24,8 @@ function handleLogin(req, res) {
       res.writeHead(200, { "Content-type": "text/html" });
       res.end("<h1>Login Successful!</h1>");
     } else {
-      res.writeHead(401, { "Content-type": "text/html" });
-      res.end("<h1>Invalid username or password.</h1>");
+      //res.writeHead(302, { Location: "/?error=login_failed" });
+      //res.end();
     }
   });
 }
