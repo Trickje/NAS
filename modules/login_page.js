@@ -40,36 +40,6 @@ function createLoginFormElements(document) {
   return loginForm;
 }
 
-/*
-// Function to handle form submission
-function handleFormSubmission(event) {
-  event.preventDefault(); // Prevent default form submission
-  console.log("Form submission event triggered."); // Add console log
-  const formData = new FormData(this); // Get form data
-  console.log("Form data:", formData); // Add console log
-  fetch("/login", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      console.log("Response received from server:", response); // Add console log
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw new Error("Login failed");
-      }
-    })
-    .then((data) => {
-      // Display response
-      console.log("Server response:", data); // Add console log
-      document.body.innerHTML = data;
-    })
-    .catch((error) => {
-      // Handle error
-      console.error(error);
-    });
-}*/
-
 // Function to create login page DOM tree
 export function createLoginPage() {
   // Create a new DOM window
