@@ -2,8 +2,8 @@
 import { createLoginPage } from "./login_page.js";
 
 // Function to serve the login page
-function serveLoginPage(req, res) {
-  const loginPageHTML = createLoginPage();
+function serveLoginPage(req, res, errorMsg) {
+  const loginPageHTML = createLoginPage(errorMsg);
   res.writeHead(200, { "Content-type": "text/html" });
   res.end(loginPageHTML);
 }
@@ -24,8 +24,7 @@ function handleLogin(req, res) {
       res.writeHead(200, { "Content-type": "text/html" });
       res.end("<h1>Login Successful!</h1>");
     } else {
-      //res.writeHead(302, { Location: "/?error=login_failed" });
-      //res.end();
+      serveLoginPage(req, res, "Password and username combination is invalid.");
     }
   });
 }

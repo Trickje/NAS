@@ -40,8 +40,69 @@ function createLoginFormElements(document) {
   return loginForm;
 }
 
+function createErrorMessage(document, msg) {
+  var errorMessage = document.createElement("div");
+  errorMessage.classList.add("error-message"); // Adding a class for styling
+
+  // Setting the message content
+  errorMessage.textContent = msg;
+
+  // Appending the error message to the document body
+  document.body.appendChild(errorMessage);
+}
+
+function createStyleSheet(document) {
+  // Create a <style> element
+  var styleElement = document.createElement("style");
+
+  // Add CSS rules to the style element
+  styleElement.textContent = `
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-form {
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      width: 300px;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .login-form button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 8px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .login-form button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    .error-message {
+      color: red;
+      border: 1px solid red;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+  `;
+
+  // Append the style element to the head of the document
+  document.head.appendChild(styleElement);
+}
+
 // Function to create login page DOM tree
-export function createLoginPage() {
+export function createLoginPage(errorMsg) {
   // Create a new DOM window
   var dom = new JSDOM(`<!DOCTYPE html><html><head></head><body></body></html>`);
   var { document } = dom.window;
@@ -50,6 +111,13 @@ export function createLoginPage() {
 
   // Append form to body
   document.body.appendChild(loginForm);
+
+  if (errorMsg) {
+    createErrorMessage(document, errorMsg);
+  }
+
+  // Create and append the stylesheet
+  createStyleSheet(document);
 
   // Return the login form HTML
   return dom.serialize();
