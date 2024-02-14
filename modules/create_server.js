@@ -1,11 +1,48 @@
 // Import the createLoginPage function
 import { createLoginPage } from "./login_page.js";
+import fs from "fs";
+import path from "path";
 
 // Function to serve the login page
 function serveLoginPage(req, res, errorMsg) {
-  const loginPageHTML = createLoginPage(errorMsg);
-  res.writeHead(200, { "Content-type": "text/html" });
-  res.end(loginPageHTML);
+  let filePath = "." + req.url;
+  filePath = "./pages/login.html";
+
+  const extname = path.extname(filePath);
+  let contentType = "text/html";
+
+  switch (extname) {
+    case ".js":
+      contentType = "text/javascript";
+      break;
+    case ".css":
+      contentType = "text/css";
+      break;
+    case ".json":
+      contentType = "application/json";
+      break;
+    case ".png":
+      contentType = "image/png";
+      break;
+    case ".jpg":
+      contentType = "image/jpg";
+      break;
+  }
+
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        res.writeHead(404);
+        res.end("404 Not Found");
+      } else {
+        res.writeHead(500);
+        res.end(`Server Error: ${err.code}`);
+      }
+    } else {
+      res.writeHead(200, { "Content-Type": contentType });
+      res.end(content, "utf-8");
+    }
+  });
 }
 
 // Function to handle POST request for login
