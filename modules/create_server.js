@@ -39,6 +39,7 @@ function serveLoginPage(req, res, errorMsg) {
         res.end(`Server Error: ${err.code}`);
       }
     } else {
+      //TODO: write the error message to the HTML
       res.writeHead(200, { "Content-Type": contentType });
       res.end(content, "utf-8");
     }
