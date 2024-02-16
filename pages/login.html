@@ -48,6 +48,10 @@
       .login-form button:hover {
         background-color: #0056b3;
       }
+      .error-message {
+        color: #d33;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -64,6 +68,13 @@
         <button type="submit">Login</button>
       </form>
       <div class="error-message" id="error-message"></div>
+      <script>
+        function displayErrorMessage(message) {
+          const errorMessageElement = document.getElementById("error-message");
+          errorMessageElement.innerText = message;
+          errorMessageElement.style.display = "block"; // Show the error message
+        }
+      </script>
     </div>
   </body>
 </html>
