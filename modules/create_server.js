@@ -29,6 +29,7 @@ function serveLoginPage(req, res, errorMsg) {
       break;
   }
 
+  //TODO: add a register functionality
   fs.readFile(filePath, (err, content) => {
     if (err) {
       if (err.code === "ENOENT") {
@@ -63,6 +64,8 @@ function handleLogin(req, res) {
     const password = formData.get("password");
 
     // Perform login validation (dummy example)
+    // TODO: add a NoSQL database. (Because I don't know the full extent of the database values yet and this is nice and extendible)
+    // TODO: add 2FA
     if (username === "admin" && password === "password") {
       res.writeHead(200, { "Content-type": "text/html" });
       res.end("<h1>Login Successful!</h1>");
