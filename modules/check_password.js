@@ -29,6 +29,8 @@ export function validatePasswordRequirements(password) {
 }
 
 export function isPasswordStrong(password) {
+  if (!password) return;
+  password = String(password);
   // Implementation of strength criteria
   // Return true if password is considered strong, false otherwise
 

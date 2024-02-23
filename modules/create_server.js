@@ -1,5 +1,6 @@
 // Import the createLoginPage function
 import { createLoginPage } from "./login_page.js";
+import { isPasswordStrong } from "./check_password.js";
 import fs from "fs";
 import path from "path";
 
@@ -131,6 +132,12 @@ export function create_server(req, res) {
     handleLogin(req, res);
   } else if (req.url === "/register") {
     serveRegisterPage(req, res);
+  } else if (req.url === "/checkPasswordStrength") {
+    console.log(req);
+    res.writeHead(200, { "Content-Type": "application/json" });
+
+    //!This might be broken still
+    res.end({ isStrongPassword: isPasswordStrong(req.body) }, "utf-8");
   }
   // Handle other routes
   else {

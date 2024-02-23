@@ -76,6 +76,7 @@
           type="password"
           name="password"
           placeholder="Enter password"
+          id="password"
           required
         />
         <div id="passwordStrength"></div>
@@ -97,6 +98,7 @@
       const passwordStrength = document.getElementById("passwordStrength");
       const passwordValid = document.getElementById("passwordValid");
 
+      console.log(passwordInput);
       passwordInput.addEventListener("input", async () => {
         const password = passwordInput.value;
 
@@ -109,9 +111,11 @@
           },
           body: JSON.stringify({ password }),
         });
+        console.log(await response);
 
         const { isStrongPassword } = await response.json();
-
+        console.log(isStrongPassword);
+        console.log("here");
         if (isStrongPassword) {
           passwordStrength.textContent = "Strong password";
           submitButton.disabled = false;
