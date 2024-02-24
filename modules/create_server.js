@@ -136,8 +136,10 @@ export function create_server(req, res) {
     console.log(req);
     res.writeHead(200, { "Content-Type": "application/json" });
 
-    //!This might be broken still
-    res.end({ isStrongPassword: isPasswordStrong(req.body) }, "utf-8");
+    const responseBody = JSON.stringify({
+      isStrongPassword: isPasswordStrong(req.body),
+    });
+    res.end(responseBody, "utf-8");
   }
   // Handle other routes
   else {

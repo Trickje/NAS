@@ -111,17 +111,21 @@
           },
           body: JSON.stringify({ password }),
         });
-        console.log(await response);
-
-        const { isStrongPassword } = await response.json();
-        console.log(isStrongPassword);
-        console.log("here");
-        if (isStrongPassword) {
-          passwordStrength.textContent = "Strong password";
-          submitButton.disabled = false;
-        } else {
-          passwordStrength.textContent = "Weak password"; //TODO: Give information on why
-          submitButton.disabled = true;
+        try {
+          const myRes = await response.json();
+          console.log(myRes);
+          const { isStrongPassword } = myRes;
+          console.log(isStrongPassword);
+          console.log("here");
+          if (isStrongPassword) {
+            passwordStrength.textContent = "Strong password";
+            submitButton.disabled = false;
+          } else {
+            passwordStrength.textContent = "Weak password"; //TODO: Give information on why
+            submitButton.disabled = true;
+          }
+        } catch (error) {
+          console.error("Error parsing JSON response:", error);
         }
       });
     </script>
