@@ -72,6 +72,18 @@
           placeholder="Retype email"
           required
         /><br />
+        <div>
+          <h4>Password requirements</h4>
+          <ol>
+            <li>It must contain at least one alphabetical character.</li>
+            <li>It must contain at least one digit.</li>
+            <li>
+              It must contain at least one special character from the set
+              @$!%*?&.
+            </li>
+            <li>It must be at least 8 characters in length.</li>
+          </ol>
+        </div>
         <input
           type="password"
           name="password"
@@ -98,13 +110,12 @@
       const passwordStrength = document.getElementById("passwordStrength");
       const passwordValid = document.getElementById("passwordValid");
 
-      console.log(passwordInput);
       passwordInput.addEventListener("input", async () => {
         const password = passwordInput.value;
-
-        // Send password to server for strength check
-        const response = await fetch("/checkPasswordStrength", {
-          // TODO: Implement on the server
+        // First check if it's valid
+        let isValidPassword = false;
+        // Send password to server for validness check
+        const responseValid = await fetch("/checkPasswordValid", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -112,17 +123,36 @@
           body: JSON.stringify({ password }),
         });
         try {
-          const myRes = await response.json();
-          console.log(myRes);
-          const { isStrongPassword } = myRes;
-          console.log(isStrongPassword);
-          console.log("here");
-          if (isStrongPassword) {
-            passwordStrength.textContent = "Strong password";
+          let res = await responseValid.json();
+          console.log("Response: ", res);
+          isValidPassword = res.isValidPassword;
+          if (isValidPassword) {
             submitButton.disabled = false;
           } else {
-            passwordStrength.textContent = "Weak password"; //TODO: Give information on why
+            passwordStrength.textContent =
+              "Password does not meet requirements";
             submitButton.disabled = true;
+          }
+        } catch (error) {
+          console.error("Error parsing JSON response:", error);
+        }
+        console.log("Is valid password: ", isValidPassword);
+        if (!isValidPassword) return;
+
+        // Send password to server for strength check
+        const response = await fetch("/checkPasswordStrength", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        });
+        try {
+          const { isStrongPassword } = await response.json();
+          if (isStrongPassword) {
+            passwordStrength.textContent = "Strong password";
+          } else {
+            passwordStrength.textContent = "Weak password";
           }
         } catch (error) {
           console.error("Error parsing JSON response:", error);

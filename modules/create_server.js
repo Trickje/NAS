@@ -1,6 +1,9 @@
 // Import the createLoginPage function
 import { createLoginPage } from "./login_page.js";
-import { isPasswordStrong } from "./check_password.js";
+import {
+  isPasswordStrong,
+  validatePasswordRequirements,
+} from "./check_password.js";
 import fs from "fs";
 import path from "path";
 
@@ -133,11 +136,17 @@ export function create_server(req, res) {
   } else if (req.url === "/register") {
     serveRegisterPage(req, res);
   } else if (req.url === "/checkPasswordStrength") {
-    console.log(req);
     res.writeHead(200, { "Content-Type": "application/json" });
-
     const responseBody = JSON.stringify({
       isStrongPassword: isPasswordStrong(req.body),
+    });
+    res.end(responseBody, "utf-8");
+  } else if (req.url === "/checkPasswordValid") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    console.log(req.body);
+    const value = validatePasswordRequirements(req.body);
+    const responseBody = JSON.stringify({
+      isValidPassword: validatePasswordRequirements(req.body),
     });
     res.end(responseBody, "utf-8");
   }
