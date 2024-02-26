@@ -143,7 +143,7 @@ export function create_server(req, res) {
     res.end(responseBody, "utf-8");
   } else if (req.url === "/checkPasswordValid") {
     res.writeHead(200, { "Content-Type": "application/json" });
-    console.log(req.body);
+    console.log("req.body: ", req.body); //! this is undefined
     const value = validatePasswordRequirements(req.body);
     const responseBody = JSON.stringify({
       isValidPassword: validatePasswordRequirements(req.body),

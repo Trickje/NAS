@@ -114,13 +114,15 @@
         const password = passwordInput.value;
         // First check if it's valid
         let isValidPassword = false;
+        let bodyStr = JSON.stringify({ password });
+        console.log("BodyStr: ", bodyStr);
         // Send password to server for validness check
         const responseValid = await fetch("/checkPasswordValid", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ password }),
+          body: bodyStr,
         });
         try {
           let res = await responseValid.json();
