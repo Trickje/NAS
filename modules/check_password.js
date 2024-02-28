@@ -15,7 +15,6 @@ export function checkPassword(password) {
 }
 
 export function validatePasswordRequirements(password) {
-  console.log(password, typeof password);
   if (!password) return false;
   password = String(password);
   /**

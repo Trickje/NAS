@@ -4,6 +4,7 @@ import {
   isPasswordStrong,
   validatePasswordRequirements,
 } from "./check_password.js";
+import { parseJSON } from "./parse_json.js";
 import fs from "fs";
 import path from "path";
 
@@ -136,19 +137,35 @@ export function create_server(req, res) {
   } else if (req.url === "/register") {
     serveRegisterPage(req, res);
   } else if (req.url === "/checkPasswordStrength") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    const responseBody = JSON.stringify({
-      isStrongPassword: isPasswordStrong(req.body),
+    parseJSON(req, (error, body) => {
+      if (error) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid JSON" }));
+        return;
+      }
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      const value = isPasswordStrong(body.password);
+      const responseBody = JSON.stringify({
+        isStrongPassword: value,
+      });
+      res.end(responseBody, "utf-8");
     });
-    res.end(responseBody, "utf-8");
   } else if (req.url === "/checkPasswordValid") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    console.log("req.body: ", req.body); //! this is undefined because it is not parsed JSON yet.
-    const value = validatePasswordRequirements(req.body);
-    const responseBody = JSON.stringify({
-      isValidPassword: validatePasswordRequirements(req.body),
+    parseJSON(req, (error, body) => {
+      if (error) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid JSON" }));
+        return;
+      }
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      const value = validatePasswordRequirements(body.password);
+      const responseBody = JSON.stringify({
+        isValidPassword: value,
+      });
+      res.end(responseBody, "utf-8");
     });
-    res.end(responseBody, "utf-8");
   }
   // Handle other routes
   else {
