@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {*} req The request to parse the JSON from
+ * @param {*} callback the callback function to call when it is done, it takes in an error and jsonData
+ */
 export function parseJSON(req, callback) {
   let data = "";
 
