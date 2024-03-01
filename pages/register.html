@@ -66,6 +66,7 @@
     <div class="register-container">
       <h2>Register</h2>
       <form class="register-form" action="/register" method="post">
+        <!-- TODO: add some titles to the input fields. When you've filled them in it's a bit vague that they resemble, especially the passwords. -->
         <input
           type="text"
           name="username"
@@ -110,17 +111,46 @@
           type="password"
           name="retype_password"
           placeholder="Retype password"
+          id="retype_password"
           required
-        /><br />
+        />
+        <div id="passwordConfirmText"></div>
+        <br />
         <button type="submit" id="submitBtn" disabled>Register</button>
       </form>
     </div>
 
     <script>
       const passwordInput = document.getElementById("password");
+      const passwordConfirmationInput =
+        document.getElementById("retype_password");
       const submitButton = document.getElementById("submitBtn");
       const passwordStrength = document.getElementById("passwordStrength");
       const passwordValid = document.getElementById("passwordValid");
+      const passwordConfirmText = document.getElementById(
+        "passwordConfirmText"
+      );
+      var doPasswordsMatch = false;
+      var isPasswordValid = false;
+      var doEmailsMatch = false; //TODO: add event listener
+      var isEmailValid = false; //TODO: add event listener
+      var isUsernameValid = false; //TODO: add event listener
+      var isUsernameTaken = false; //TODO: add event listener
+      var isEmailTaken = false; //TODO: add event listener
+
+      passwordConfirmationInput.addEventListener("focusout", async () => {
+        const password = passwordInput.value;
+        const passwordConfirm = passwordConfirmationInput.value;
+        if (
+          password != undefined &&
+          passwordConfirmationInput != undefined &&
+          password === passwordConfirm
+        ) {
+          passwordConfirmText.textContent = ""; //Clear if it's good.
+        } else {
+          passwordConfirmText.textContent = "Passwords do not match";
+        }
+      });
 
       passwordInput.addEventListener("input", async () => {
         const password = passwordInput.value;
@@ -139,7 +169,7 @@
           let res = await responseValid.json();
           isValidPassword = res.isValidPassword;
           if (isValidPassword) {
-            submitButton.disabled = false;
+            submitButton.disabled = false; // this is a very strong action..
           } else {
             passwordStrength.textContent =
               "Password does not meet requirements";
