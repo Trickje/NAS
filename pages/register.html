@@ -67,18 +67,21 @@
       <h2>Register</h2>
       <form class="register-form" action="/register" method="post">
         <!-- TODO: add some titles to the input fields. When you've filled them in it's a bit vague that they resemble, especially the passwords. -->
+        <label for="username">Username:</label>
         <input
           type="text"
           name="username"
           placeholder="Enter username"
           required
         /><br />
+        <label for="email">Email:</label>
         <input
           type="email"
           name="email"
           placeholder="Enter email"
           required
         /><br />
+        <label for="retype_email">Retype Email:</label>
         <input
           type="email"
           name="retype_email"
@@ -97,6 +100,7 @@
             <li>It must be at least 8 characters in length.</li>
           </ol>
         </div>
+        <label for="password">Password:</label>
         <input
           type="password"
           name="password"
@@ -107,6 +111,7 @@
         <div id="passwordStrength"></div>
         <div id="passwordValid"></div>
         <br />
+        <label for="retype_password">Retype Password:</label>
         <input
           type="password"
           name="retype_password"
