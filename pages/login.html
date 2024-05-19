@@ -64,12 +64,19 @@
   <body>
     <div class="login-container">
       <h2>Login</h2>
-      <form class="login-form" action="/login" method="post">
-        <input type="text" name="username" placeholder="Username" required />
+      <form id="login-form" class="login-form" action="/login" method="post">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          autocomplete="username"
+          required
+        />
         <input
           type="password"
           name="password"
           placeholder="Password"
+          autocomplete="current-password"
           required
         />
         <button type="submit">Login</button>
@@ -94,6 +101,28 @@
       </a>
 
       <script>
+        (function () {
+          const form = document.getElementById("login-form");
+
+          form.addEventListener("submit", function (ev) {
+            ev.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch("/login", {
+              method: "POST",
+              body: formData,
+            })
+              .then((data) => {
+                //todo handle response data.
+                //todo Redirect
+              })
+              .catch((error) => {
+                console.error("Error: ", error);
+              });
+          });
+        })();
+
         function displayErrorMessage(message) {
           const errorMessageElement = document.getElementById("error-message");
           errorMessageElement.innerText = message;

@@ -6,8 +6,26 @@ function createLoginFormElements(document) {
   // Create login form
   var loginForm = document.createElement("form");
   loginForm.setAttribute("id", "loginForm");
-  loginForm.setAttribute("action", "/login");
+  loginForm.setAttribute("action", "/login"); // Will be overridden but is a fallback
   loginForm.setAttribute("method", "post"); // Set method to POST
+  loginForm.addEventListener("submit", function (ev) {
+    ev.preventDefault(); // To not navigate.
+
+    const formData = new FormData(loginForm);
+
+    fetch("/login", {
+      method: "POST",
+      body: formData,
+    })
+      .then((data) => {
+        //todo handle response data
+        console.log("Success: ", data);
+        //todo redirect or update the UI based on the response
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  });
 
   // Username field
   var usernameLabel = document.createElement("label");
