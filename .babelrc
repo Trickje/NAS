@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        },
+        "modules": false // Prevents transpiling ES modules to CommonJS
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}

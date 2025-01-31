@@ -1,2 +1,4 @@
 #ignore the node module folder
 node_modules/
+#ignore output folder
+dist/
