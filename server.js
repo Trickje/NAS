@@ -1,11 +1,7 @@
-import { create_server } from "./modules/create_server.js";
-import http from "http";
-import { createRoot } from "react-dom/client";
-
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import { handleRegister } from "./modules/handle_register";
 const app = express();
 const port = 8080;
 
@@ -22,11 +18,15 @@ console.log(__dirname);
 // Nodejs  //     installed
 //TODO: change this to https so we are securely handling passwords!
 // //http.createServer(create_server).listen(8080);
-// Serve static files from the dist directory
-app.use("public", express.static(path.join(__dirname, "dist/public")));
+// Serve static files from dist (for React build assets)
+app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/pages/", "index.html"), (err) => {
+app.post("/api/register", (req, res) => {
+  res.json(handleRegister(req));
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"), (err) => {
     if (err) {
       console.error("Error serving page index.html: ", err);
     }
@@ -36,3 +36,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+// Use ES Module syntax
+export { app as viteNodeApp };

@@ -1,0 +1,137 @@
+/* General form styling */
+div {
+  font-family: Arial, sans-serif;
+}
+
+/* Full-page gradient */
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents unwanted scrollbars */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6a88);
+  background-size: 400% 400%; /* Enlarged to create a moving effect */
+  animation: gradientShift 10s ease infinite;
+}
+
+/* Keyframes for smooth gradient movement */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  animation: gradientShift 10s ease infinite;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Input field styling */
+input {
+  width: calc(100% - 2px);
+  padding: 10px 0 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+  background-color: #d3d3d3;
+}
+
+input:focus {
+  border-color: #007bff;
+  background-color: white;
+  outline: none;
+}
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Field container */
+.PasswordField,
+.UsernameField {
+  margin-bottom: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  input {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+.main > h1 {
+  text-align: center;
+}
+
+.LoginForm {
+  width: 500px;
+  height: auto;
+  background: linear-gradient(135deg, #666666, #ffffff);
+  border-radius: 5px;
+  padding: 10px;
+}
+a.Register {
+  color: #444;
+}
+a.Register:hover {
+  color: #ee0;
+}
+/*
+
+.PasswordField {
+  margin: 20px;
+  height: 50px;
+  width: 300px;
+  background: red;
+  border-radius: 0.5em;
+  align-content: center;
+}
+
+.PasswordField > input {
+  float: right;
+  border-radius: 0.5em;
+  border-color: darkgrey;
+  background-color: lightgrey;
+}
+
+.UsernameField {
+  margin: 20px;
+  width: 300px;
+  height: 50px;
+  border-radius: 5em;
+  border-width: 1em;
+  border-color: darkgrey;
+  border-style: solid;
+  background: darkgrey;
+  align-content: center;
+}
+
+.UsernameField > input {
+  float: right;
+  border-radius: 0.5em;
+  border-color: darkgrey;
+  background-color: lightgrey;
+}
+*/

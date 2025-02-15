@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { VitePluginNode } from "vite-plugin-node";
 
 export default defineConfig({
   plugins: [react()],
@@ -8,15 +9,13 @@ export default defineConfig({
     include: /\.[jt]sx?$/,
   },
   build: {
-    outDir: "dist/public",
-    base: "/dist/public/",
-    rollupOptions: {
-      input: "public/js/HelloWorld.jsx",
-    },
+    outDir: "dist",
   },
   base: "/",
   server: {
     open: true,
-    port: 3000,
+    proxy: {
+      "/api": "http://localhost:8080", // Forward API requests to Express backend
+    },
   },
 });
