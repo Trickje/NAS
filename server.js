@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { handleRegister } from "./modules/handle_register";
+import { handleRegister } from "./modules/handle_register.js";
 const app = express();
 const port = 8080;
 
@@ -20,9 +20,13 @@ console.log(__dirname);
 // //http.createServer(create_server).listen(8080);
 // Serve static files from dist (for React build assets)
 app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.json());
 
 app.post("/api/register", (req, res) => {
-  res.json(handleRegister(req));
+  handleRegister(req).then((response) => {
+    console.log(response);
+    res.status(201).json(response);
+  });
 });
 
 app.get("*", (req, res) => {
