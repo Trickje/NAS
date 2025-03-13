@@ -3,7 +3,7 @@ import {
   checkPassword,
   validatePasswordRequirements,
   isPasswordStrong,
-} from "../modules/check_password.js";
+} from "../modules/check-password.ts";
 import * as assert from "assert";
 
 describe("Validate password requirements", () => {

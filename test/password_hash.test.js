@@ -1,16 +1,16 @@
 import assert from "assert";
-import { hash_password, comparePassword } from "../modules/hash_password.js";
+import { hashPassword, comparePassword } from "../modules/hash-password.ts";
 
 describe("Password functions", function () {
-  describe("hash_password", function () {
+  describe("hashPassword", function () {
     var first_hashedPassword;
     it("should hash a password", async function () {
-      first_hashedPassword = await hash_password("MyP@ssw0rd");
+      first_hashedPassword = await hashPassword("MyP@ssw0rd");
       assert.notStrictEqual(first_hashedPassword, "MyP@ssw0rd");
     });
 
     it("should not return the same hash hash a password", async function () {
-      const second_hashedPassword = await hash_password("MyP@ssw0rd");
+      const second_hashedPassword = await hashPassword("MyP@ssw0rd");
       assert.notStrictEqual(first_hashedPassword, second_hashedPassword);
     });
   });

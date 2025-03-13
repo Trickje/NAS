@@ -1,4 +1,4 @@
-import { check_email } from "../modules/check_email.js";
+import { check_email } from "../modules/check-email.ts";
 import assert from "assert";
 
 describe("Email Validation", function () {
