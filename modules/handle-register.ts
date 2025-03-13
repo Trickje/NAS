@@ -1,12 +1,17 @@
-import { validatePasswordRequirements } from "./check_password.js";
+import { validatePasswordRequirements } from "./check-password.js";
+import User from "../models/User.js";
+import { Request } from "express";
 
-export async function handleRegister(request) {
+export async function handleRegister(request: Request) {
   try {
     console.log("Request Body:", request.body); // Log the parsed JSON data
     let account = request.body;
     let password = account.password;
+    let username = account.username;
     if (validatePasswordRequirements(password)) {
-      return { message: "Password created.", username: account.username };
+      const user = new User({ username, password });
+      await user.save();
+      return { message: "Password created.", username: username };
     } else {
       return { error: "Invalid password" };
     }

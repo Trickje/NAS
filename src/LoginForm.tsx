@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-function PasswordField({ setPassword }) {
+interface InputFieldProps {
+  setValue: (value: string) => void;
+}
+
+const PasswordField = ({ setValue }: InputFieldProps) => {
   return (
     <div className="PasswordField">
       <label htmlFor="passwordfield">Password</label>
@@ -8,13 +12,13 @@ function PasswordField({ setPassword }) {
         type="password"
         id="passwordfield"
         name="passwordfield"
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
       />
     </div>
   );
-}
+};
 
-function UserNameField({ setUsername }) {
+const UserNameField = ({ setValue }: InputFieldProps) => {
   return (
     <div className="UsernameField">
       <label htmlFor="usernamefield">Username</label>
@@ -22,15 +26,20 @@ function UserNameField({ setUsername }) {
         type="text"
         id="usernamefield"
         name="usernamefield"
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
       />
     </div>
   );
+};
+
+interface LoginFieldProps {
+  username: string;
+  password: string;
 }
 
-function RegisterField({ username, password }) {
-  function onClickRegister() {
-    fetch("/api/register", {
+const LoginField = ({ username, password }: LoginFieldProps) => {
+  const onClickLogin = () => {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,29 +49,40 @@ function RegisterField({ username, password }) {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.error("Error:", err));
-  }
+  };
 
   return (
-    <div>
-      <a href="/register" className="Register">
-        Register new account
-      </a>
+    <div className="LoginField">
+      <button onClick={onClickLogin}>Login</button>
+    </div>
+  );
+};
+
+const RegisterField = () => {
+  const onClickRegister = () => {
+    window.location.href = "/register";
+  };
+
+  return (
+    <div className="RegisterField">
+      Don't have an account yet?
       <button onClick={onClickRegister}>Register</button>
     </div>
   );
-}
+};
 
-function LoginForm() {
+const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <div className="LoginForm">
-      <UserNameField setUsername={setUsername} />
-      <PasswordField setPassword={setPassword} />
-      <RegisterField username={username} password={password} />
+      <UserNameField setValue={setUsername} />
+      <PasswordField setValue={setPassword} />
+      <LoginField username={username} password={password} />
+      <RegisterField />
     </div>
   );
-}
+};
 
 export default LoginForm;

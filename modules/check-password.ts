@@ -1,6 +1,6 @@
-import { comparePassword } from "./hash_password.js";
-import { hasKeyboardAdjacent } from "./check_keyboard_adjacent.js";
-export function checkPassword(password) {
+import { comparePassword } from "./hash-password.js";
+import { hasKeyboardAdjacent } from "./check-keyboard-adjacent.js";
+export function checkPassword(password: string): boolean {
   /**
    * This regex enforces the following rules for the password:
 
@@ -340,18 +340,20 @@ export function isPasswordStrong(password) {
   return true;
 }
 
-export function canBeNewPassword(password) {
+export function canBeNewPassword(password: string) {
   //TODO: Call to the database and receives a hashed password
   const previousPass = "";
-  if (comparePassword(password, previousPass)) {
-    //Cannot be the same a the previous password.'
-    return false;
-  }
+  comparePassword(password, previousPass).then((isSame) => {
+    if (isSame) {
+      //Cannot be the same a the previous password.'
+      return false;
+    }
 
-  if (checkPassword(password) == false) {
-    //Should follow the password guidelines
-    return false;
-  }
+    if (checkPassword(password) == false) {
+      //Should follow the password guidelines
+      return false;
+    }
 
-  return true;
+    return true;
+  });
 }

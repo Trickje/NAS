@@ -1,0 +1,46 @@
+/* General form styling */
+div {
+  font-family: Arial, sans-serif;
+}
+
+/* Full-page gradient */
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents unwanted scrollbars */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6a88);
+  background-size: 400% 400%; /* Enlarged to create a moving effect */
+  animation: gradientShift 10s ease infinite;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Keyframes for smooth gradient movement */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  animation: gradientShift 10s ease infinite;
+}
+
+.main {
+  text-align: center;
+}

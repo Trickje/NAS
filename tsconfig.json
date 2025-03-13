@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx", // For React 17+ (use "react" for React 16 or older)
+    "allowJs": true,
+    "module": "ESNext",  // Or "ES6" if you're using an older version of Node
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true   // Don't emit any output files (just for type-checking)
+  },
+}

@@ -1,4 +1,7 @@
-export function hasKeyboardAdjacent(password, characters) {
+export function hasKeyboardAdjacent(
+  password: string,
+  characters: string
+): boolean {
   for (let i = 0; i < password.length - 1; i++) {
     const currentChar = password[i];
     const nextChar = password[i + 1];
