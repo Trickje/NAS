@@ -14,7 +14,7 @@ export function checkPassword(password: string): boolean {
   return checking_regex.test(password);
 }
 
-export function validatePasswordRequirements(password) {
+export function validatePasswordRequirements(password: string) {
   if (!password) return false;
   password = String(password);
   /**
@@ -30,7 +30,7 @@ export function validatePasswordRequirements(password) {
   return checking_regex.test(password);
 }
 
-export function isPasswordStrong(password) {
+export function isPasswordStrong(password: string) {
   if (!password) return;
   password = String(password);
   // Implementation of strength criteria

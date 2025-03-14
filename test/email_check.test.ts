@@ -1,5 +1,6 @@
-import { check_email } from "../modules/check-email.ts";
+import { check_email } from "../modules/check-email";
 import assert from "assert";
+import { it } from "mocha";
 
 describe("Email Validation", function () {
   it("should return true for valid email addresses", function () {

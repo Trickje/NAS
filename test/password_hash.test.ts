@@ -1,9 +1,10 @@
 import assert from "assert";
-import { hashPassword, comparePassword } from "../modules/hash-password.ts";
+import { hashPassword, comparePassword } from "../modules/hash-password";
+import { it } from "mocha";
 
 describe("Password functions", function () {
   describe("hashPassword", function () {
-    var first_hashedPassword;
+    var first_hashedPassword: string;
     it("should hash a password", async function () {
       first_hashedPassword = await hashPassword("MyP@ssw0rd");
       assert.notStrictEqual(first_hashedPassword, "MyP@ssw0rd");
